@@ -1,10 +1,9 @@
-module github.com/tamagossi/room-bookings
+module github.com/tamagossi/room-booking
 
-go 1.15
+go 1.18
 
 require (
-	github.com/alexedwards/scs/v2 v2.4.0
-	github.com/asaskevich/govalidator v0.0.0-20200907205600-7a23bdc65eef
-	github.com/go-chi/chi v1.5.1
+	github.com/alexedwards/scs/v2 v2.8.0
+	github.com/go-chi/chi/v5 v5.0.12
 	github.com/justinas/nosurf v1.1.1
 )

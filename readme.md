@@ -1,10 +1,10 @@
-# Bookings and Reservations
+# Golang Room Booking
 
-The repository for [Building Modern Web Applications with Go](https://www.udemy.com/course/building-modern-web-applications-with-go/?referralCode=0415FB906223F10C6800).
+This project is aimed as a project to learn Golang fullstack
 
+## Library
 
-
-- Built in Go version 1.15
-- Uses the [chi router](github.com/go-chi/chi)
-- Uses [alex edwards scs session management](github.com/alexedwards/scs)
-- Uses [nosurf](github.com/justinas/nosurf)
+-   Golang v.1.18
+-   [Chi Router](github.com/go-chi/chi/v5) v5.0.12
+-   [Edwards CSC Session Management](github.com/alexedwards/scs/v2) v2.8.0
+-   [Justinas Nosurf](github.com/justinas/nosurf) v1.1.1

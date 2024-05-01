@@ -1,24 +1,35 @@
 package main
 
 import (
-	"github.com/justinas/nosurf"
+	"fmt"
 	"net/http"
+
+	"github.com/justinas/nosurf"
 )
 
-// NoSurf is the csrf protection middleware
-func NoSurf(next http.Handler) http.Handler {
-	csrfHandler := nosurf.New(next)
+func WriteToConsole(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Executing write to console middleware start")
+		next.ServeHTTP(w, r)
+		fmt.Println("Executing write to console middleware end")
+	})
+}
 
+/**
+* Add CSRF to all request
+ */
+func NoSruve(next http.Handler) http.Handler {
+	csrfHandler := nosurf.New(next)
 	csrfHandler.SetBaseCookie(http.Cookie{
 		HttpOnly: true,
 		Path:     "/",
-		Secure:   app.InProduction,
 		SameSite: http.SameSiteLaxMode,
+		Secure:   app.InProduction,
 	})
+
 	return csrfHandler
 }
 
-// SessionLoad loads and saves session data for current request
-func SessionLoad(next http.Handler) http.Handler {
+func LoadSession(next http.Handler) http.Handler {
 	return session.LoadAndSave(next)
 }
