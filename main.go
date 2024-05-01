@@ -44,7 +44,10 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", HomeHandler)
 	http.HandleFunc("/about", AboutHandler)
-	// http.HandleFunc("/divide", Divide) // used in lecture 3.24 | checking error
+	/*
+		Used in lecture 3.24 | checking error
+		http.HandleFunc("/divide", Divide)
+	*/
 
 	http.ListenAndServe(port, nil)
 }
