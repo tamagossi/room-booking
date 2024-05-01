@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/tamagossi/room-bookings/handlers"
+	"github.com/tamagossi/room-bookings/pkg/handlers"
 )
 
 const port = ":8080"

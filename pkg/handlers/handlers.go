@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/tamagossi/room-bookings/utils"
+	"github.com/tamagossi/room-bookings/pkg/utils"
 )
 
 func AboutHandler(w http.ResponseWriter, r *http.Request) {
