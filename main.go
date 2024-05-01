@@ -1,39 +1,22 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
-	"text/template"
+
+	"github.com/tamagossi/room-bookings/handlers"
 )
 
 const port = ":8080"
 
 func main() {
-	http.HandleFunc("/", HomeHandler)
-	http.HandleFunc("/about", AboutHandler)
+	http.HandleFunc("/", handlers.HomeHandler)
+	http.HandleFunc("/about", handlers.AboutHandler)
 	http.ListenAndServe(port, nil)
 
 	/*
 		Used in lecture 3.24 | checking error
 		http.HandleFunc("/divide", Divide)
 	*/
-}
-
-func AboutHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "about.page.tmpl")
-}
-
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "home.page.tmpl")
-}
-
-func renderTemplate(w http.ResponseWriter, templateName string) {
-	parsedTemplate, _ := template.ParseFiles("./templates/" + templateName)
-	err := parsedTemplate.Execute(w, nil)
-	if err != nil {
-		fmt.Println("error parsing template: ", err)
-		return
-	}
 }
 
 /*
