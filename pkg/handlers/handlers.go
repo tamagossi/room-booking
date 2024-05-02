@@ -7,9 +7,9 @@ import (
 )
 
 func AboutHandler(w http.ResponseWriter, r *http.Request) {
-	utils.RenderTemplate(w, "about.page.tmpl")
+	utils.RenderTemplateWithCaching(w, "about.page.tmpl")
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	utils.RenderTemplate(w, "home.page.tmpl")
+	utils.RenderTemplateWithCaching(w, "home.page.tmpl")
 }
