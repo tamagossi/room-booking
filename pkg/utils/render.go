@@ -9,10 +9,15 @@ import (
 	"path/filepath"
 
 	"github.com/tamagossi/room-bookings/pkg/config"
+	"github.com/tamagossi/room-bookings/pkg/models"
 )
 
 var app *config.AppConfig
 var templateCache = make(map[string]*template.Template)
+
+func AddDefaultData(data *models.TemplateData) *models.TemplateData {
+	return data
+}
 
 /* Used in 3.30 */
 func CreateTemplateCache(templateName string) error {
@@ -102,7 +107,7 @@ func RenderTemplateWithCaching(w http.ResponseWriter, templateName string) {
 	}
 }
 
-func RenderTemplateWithCachingEnhanced(w http.ResponseWriter, templateName string) {
+func RenderTemplateWithCachingEnhanced(w http.ResponseWriter, templateName string, data *models.TemplateData) {
 	var templateCache map[string]*template.Template
 	if app.UseCache {
 		templateCache = app.TemplateCache
@@ -116,7 +121,9 @@ func RenderTemplateWithCachingEnhanced(w http.ResponseWriter, templateName strin
 	}
 
 	buf := new(bytes.Buffer)
-	_ = template.Execute(buf, nil)
+	data = AddDefaultData(data)
+
+	_ = template.Execute(buf, data)
 
 	_, err := buf.WriteTo(w)
 	if err != nil {

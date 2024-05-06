@@ -4,14 +4,15 @@ import (
 	"net/http"
 
 	"github.com/tamagossi/room-bookings/pkg/config"
+	"github.com/tamagossi/room-bookings/pkg/models"
 	"github.com/tamagossi/room-bookings/pkg/utils"
 )
-
-var Repo *Repository
 
 type Repository struct {
 	App *config.AppConfig
 }
+
+var Repo *Repository
 
 func NewHandler(repo *Repository) {
 	Repo = repo
@@ -22,9 +23,12 @@ func NewRepo(repo *config.AppConfig) *Repository {
 }
 
 func (repo *Repository) AboutHandler(w http.ResponseWriter, r *http.Request) {
-	utils.RenderTemplateWithCaching(w, "about.page.tmpl")
+	stringMap := make(map[string]string)
+	stringMap["test"] = "Hallo, this is test"
+
+	utils.RenderTemplateWithCachingEnhanced(w, "about.page.tmpl", &models.TemplateData{})
 }
 
 func (repo *Repository) HomeHandler(w http.ResponseWriter, r *http.Request) {
-	utils.RenderTemplateWithCaching(w, "home.page.tmpl")
+	utils.RenderTemplateWithCachingEnhanced(w, "home.page.tmpl", &models.TemplateData{})
 }
