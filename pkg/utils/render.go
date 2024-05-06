@@ -85,7 +85,7 @@ func RenderTemplate(w http.ResponseWriter, templateName string) {
 	}
 }
 
-/* Used in 3.30 */
+/* @depreacated. Used in 3.30 */
 func RenderTemplateWithCaching(w http.ResponseWriter, templateName string) {
 	var tmpl *template.Template
 	var err error
