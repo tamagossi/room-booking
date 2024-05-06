@@ -20,9 +20,15 @@ func main() {
 	}
 
 	app.TemplateCache = templateCache
+	app.UseCache = false
 
-	http.HandleFunc("/", handlers.HomeHandler)
-	http.HandleFunc("/about", handlers.AboutHandler)
+	repo := handlers.NewRepo(&app)
+
+	handlers.NewHandler(repo)
+	utils.NewTemplate(&app)
+
+	http.HandleFunc("/", handlers.Repo.HomeHandler)
+	http.HandleFunc("/about", handlers.Repo.AboutHandler)
 	http.ListenAndServe(port, nil)
 
 	/*

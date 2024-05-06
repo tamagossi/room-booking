@@ -7,13 +7,14 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/tamagossi/room-bookings/pkg/config"
 )
 
+var app *config.AppConfig
 var templateCache = make(map[string]*template.Template)
 
-/*
-	Used in 3.30
-*/
+/* Used in 3.30 */
 func CreateTemplateCache(templateName string) error {
 	templates := []string{
 		fmt.Sprintf("./templates/%s", templateName),
@@ -65,9 +66,11 @@ func CreateTemplateCacheEnhanced() (map[string]*template.Template, error) {
 	return cache, nil
 }
 
-/*
-	Used before 3.30
-*/
+func NewTemplate(appConfig *config.AppConfig) {
+	app = appConfig
+}
+
+/* Used before 3.30 */
 func RenderTemplate(w http.ResponseWriter, templateName string) {
 	parsedTemplate, _ := template.ParseFiles("./templates/"+templateName, "./templates/base.layout.tmpl")
 	err := parsedTemplate.Execute(w, nil)
@@ -77,9 +80,7 @@ func RenderTemplate(w http.ResponseWriter, templateName string) {
 	}
 }
 
-/*
-	Used in 3.30
-*/
+/* Used in 3.30 */
 func RenderTemplateWithCaching(w http.ResponseWriter, templateName string) {
 	var tmpl *template.Template
 	var err error
@@ -102,28 +103,23 @@ func RenderTemplateWithCaching(w http.ResponseWriter, templateName string) {
 }
 
 func RenderTemplateWithCachingEnhanced(w http.ResponseWriter, templateName string) {
-	/*
-		Get template cache from app config
-	*/
-
-	templateCache, err := CreateTemplateCacheEnhanced()
-	if err != nil {
-		log.Fatal(err)
+	var templateCache map[string]*template.Template
+	if app.UseCache {
+		templateCache = app.TemplateCache
+	} else {
+		templateCache, _ = CreateTemplateCacheEnhanced()
 	}
 
 	template, ok := templateCache[templateName]
 	if !ok {
-		log.Fatal(err)
+		log.Fatal("Could not get template from template cache")
 	}
 
 	buf := new(bytes.Buffer)
-	err = template.Execute(buf, nil)
-	if !ok {
-		log.Fatal(err)
-	}
+	_ = template.Execute(buf, nil)
 
-	_, err = buf.WriteTo(w)
+	_, err := buf.WriteTo(w)
 	if err != nil {
-		log.Println(err)
+		log.Println("Error writing template to browser", err)
 	}
 }
