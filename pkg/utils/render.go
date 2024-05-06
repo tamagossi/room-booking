@@ -19,7 +19,7 @@ func AddDefaultData(data *models.TemplateData) *models.TemplateData {
 	return data
 }
 
-/* Used in 3.30 */
+/* @deprecated. Used in 3.30 */
 func CreateTemplateCache(templateName string) error {
 	templates := []string{
 		fmt.Sprintf("./templates/%s", templateName),
@@ -75,7 +75,7 @@ func NewTemplate(appConfig *config.AppConfig) {
 	app = appConfig
 }
 
-/* Used before 3.30 */
+/* @deprecated. Used before 3.30 */
 func RenderTemplate(w http.ResponseWriter, templateName string) {
 	parsedTemplate, _ := template.ParseFiles("./templates/"+templateName, "./templates/base.layout.tmpl")
 	err := parsedTemplate.Execute(w, nil)
