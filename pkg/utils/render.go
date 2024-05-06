@@ -3,10 +3,10 @@ package utils
 import (
 	"bytes"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
-	"text/template"
 )
 
 var templateCache = make(map[string]*template.Template)
@@ -14,7 +14,7 @@ var templateCache = make(map[string]*template.Template)
 /*
 	Used in 3.30
 */
-func createTemplateCache(templateName string) error {
+func CreateTemplateCache(templateName string) error {
 	templates := []string{
 		fmt.Sprintf("./templates/%s", templateName),
 		"./templates/base.layout.tmpl",
@@ -29,7 +29,7 @@ func createTemplateCache(templateName string) error {
 	return nil
 }
 
-func createTemplateCacheEnhanced() (map[string]*template.Template, error) {
+func CreateTemplateCacheEnhanced() (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}
 
 	/*
@@ -86,7 +86,7 @@ func RenderTemplateWithCaching(w http.ResponseWriter, templateName string) {
 
 	_, isCacheExist := templateCache[templateName]
 	if !isCacheExist {
-		err = createTemplateCache(templateName)
+		err = CreateTemplateCache(templateName)
 		if err != nil {
 			log.Println(err)
 		}
@@ -102,7 +102,11 @@ func RenderTemplateWithCaching(w http.ResponseWriter, templateName string) {
 }
 
 func RenderTemplateWithCachingEnhanced(w http.ResponseWriter, templateName string) {
-	templateCache, err := createTemplateCacheEnhanced()
+	/*
+		Get template cache from app config
+	*/
+
+	templateCache, err := CreateTemplateCacheEnhanced()
 	if err != nil {
 		log.Fatal(err)
 	}

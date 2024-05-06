@@ -1,14 +1,26 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
+	"github.com/tamagossi/room-bookings/pkg/config"
 	"github.com/tamagossi/room-bookings/pkg/handlers"
+	"github.com/tamagossi/room-bookings/pkg/utils"
 )
 
 const port = ":8080"
 
 func main() {
+	var app config.AppConfig
+
+	templateCache, err := utils.CreateTemplateCacheEnhanced()
+	if err != nil {
+		log.Fatal("cannot create template cache")
+	}
+
+	app.TemplateCache = templateCache
+
 	http.HandleFunc("/", handlers.HomeHandler)
 	http.HandleFunc("/about", handlers.AboutHandler)
 	http.ListenAndServe(port, nil)
