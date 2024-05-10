@@ -18,8 +18,8 @@ func NewHandler(repo *Repository) {
 	Repo = repo
 }
 
-func NewRepo(repo *config.AppConfig) *Repository {
-	return &Repository{App: repo}
+func NewRepo(app *config.AppConfig) *Repository {
+	return &Repository{App: app}
 }
 
 func (repo *Repository) AboutHandler(w http.ResponseWriter, r *http.Request) {
