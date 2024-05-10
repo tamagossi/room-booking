@@ -23,12 +23,17 @@ func NewRepo(app *config.AppConfig) *Repository {
 }
 
 func (repo *Repository) AboutHandler(w http.ResponseWriter, r *http.Request) {
+	remoteIP := repo.App.Session.GetString(r.Context(), "remote_ip")
+
 	stringMap := make(map[string]string)
 	stringMap["test"] = "Hallo, this is test"
+	stringMap["remote_ip"] = remoteIP
 
 	utils.RenderTemplateWithCachingEnhanced(w, "about.page.tmpl", &models.TemplateData{})
 }
 
 func (repo *Repository) HomeHandler(w http.ResponseWriter, r *http.Request) {
+	remoteIP := r.RemoteAddr
+	repo.App.Session.Put(r.Context(), "remote_ip", remoteIP)
 	utils.RenderTemplateWithCachingEnhanced(w, "home.page.tmpl", &models.TemplateData{})
 }

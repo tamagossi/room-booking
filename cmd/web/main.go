@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/alexedwards/scs/v2"
 	"github.com/tamagossi/room-bookings/pkg/config"
 	"github.com/tamagossi/room-bookings/pkg/handlers"
 	"github.com/tamagossi/room-bookings/pkg/utils"
@@ -12,8 +14,18 @@ import (
 
 const port = ":8080"
 
+var app config.AppConfig
+var session *scs.SessionManager
+
 func main() {
-	var app config.AppConfig
+	app.InProduction = false /* Change this to true in production */
+
+	session = scs.New()
+	session.Lifetime = 24 * time.Hour
+	session.Cookie.Persist = true
+	session.Cookie.SameSite = http.SameSiteLaxMode
+	session.Cookie.Secure = app.InProduction
+	app.Session = session
 
 	templateCache, err := utils.CreateTemplateCacheEnhanced()
 	if err != nil {

@@ -7,7 +7,6 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/tamagossi/room-bookings/pkg/config"
 	"github.com/tamagossi/room-bookings/pkg/handlers"
-	"github.com/tamagossi/room-bookings/pkg/middlewares"
 )
 
 func routes(app *config.AppConfig) http.Handler {
@@ -22,7 +21,8 @@ func routes(app *config.AppConfig) http.Handler {
 	mux := chi.NewRouter()
 
 	mux.Use(middleware.Recoverer)
-	mux.Use(middlewares.NoSurf)
+	mux.Use(NoSurf)
+	mux.Use(LoadSession)
 
 	mux.Get("/", handlers.Repo.HomeHandler)
 	mux.Get("/about", handlers.Repo.AboutHandler)
