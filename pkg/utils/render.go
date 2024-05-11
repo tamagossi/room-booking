@@ -38,9 +38,7 @@ func CreateTemplateCache(templateName string) error {
 func CreateTemplateCacheEnhanced() (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}
 
-	/*
-		Get all the files named *.page.tmpl in ./templates
-	*/
+	/* Get all the files named *.page.tmpl in ./templates */
 	pages, err := filepath.Glob("./templates/*.page.tmpl")
 	if err != nil {
 		return cache, err
