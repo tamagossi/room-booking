@@ -37,3 +37,15 @@ func (repo *Repository) HomeHandler(w http.ResponseWriter, r *http.Request) {
 	repo.App.Session.Put(r.Context(), "remote_ip", remoteIP)
 	utils.RenderTemplateWithCachingEnhanced(w, "home.page.tmpl", &models.TemplateData{})
 }
+
+func (repo *Repository) GeneralQuarterHandler(w http.ResponseWriter, r *http.Request) {
+	utils.RenderTemplateWithCachingEnhanced(w, "general-quarter.page.tmpl", &models.TemplateData{})
+}
+
+func (repo *Repository) MajorSuitesHandler(w http.ResponseWriter, r *http.Request) {
+	utils.RenderTemplateWithCachingEnhanced(w, "major-suites.page.tmpl", &models.TemplateData{})
+}
+
+func (repo *Repository) ReservationHandler(w http.ResponseWriter, r *http.Request) {
+	utils.RenderTemplateWithCachingEnhanced(w, "reservation.page.tmpl", &models.TemplateData{})
+}
