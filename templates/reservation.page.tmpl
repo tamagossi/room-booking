@@ -1,0 +1,64 @@
+{{ template "base" }}
+
+{{ define "content"}}
+
+<div class="container mt-4">
+	<div class="row mt-5">
+		<div class="col">
+			<h1>Search for Availibity</h1>
+
+			<form action="/reservation" method="get">
+				<div class="row">
+					<div class="col">
+						<div class="form-group">
+							<label for="start-date">Start Date</label>
+							<input
+								aria-describedby="start-date"
+								class="form-control"
+								id="start-date"
+								name="start_date"
+								placeholder="Enter start date"
+								required
+								type="date"
+							/>
+
+							<small id="emailHelp" class="form-text text-muted">
+								Enter your starting date in the form of YYYY-MM-DD
+							</small>
+						</div>
+					</div>
+
+					<div class="col">
+						<div class="form-group">
+							<label for="end-date">End Date</label>
+							<input
+								aria-describedby="end-date"
+								class="form-control"
+								id="end-date"
+								name="end_date"
+								placeholder="Enter end date"
+								required
+								type="date"
+							/>
+
+							<small id="emailHelp" class="form-text text-muted">
+								Enter your end date in the form of YYYY-MM-DD
+							</small>
+						</div>
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary btn-block">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="row footer p-4">
+	<div class="col">Left</div>
+
+	<div class="col">Middle</div>
+
+	<div class="col">Right</div>
+</div>
+{{ end }}
