@@ -8,7 +8,7 @@
 			<h1>Search for Availibity</h1>
 
 			<form action="/reservation" method="get">
-				<div class="row">
+				<div class="row" id="reservation-date">
 					<div class="col">
 						<div class="form-group">
 							<label for="start-date">Start Date</label>
@@ -16,10 +16,10 @@
 								aria-describedby="start-date"
 								class="form-control"
 								id="start-date"
-								name="start_date"
+								name="start"
 								placeholder="Enter start date"
 								required
-								type="date"
+								type="text"
 							/>
 
 							<small id="emailHelp" class="form-text text-muted">
@@ -35,10 +35,10 @@
 								aria-describedby="end-date"
 								class="form-control"
 								id="end-date"
-								name="end_date"
+								name="end"
 								placeholder="Enter end date"
 								required
-								type="date"
+								type="text"
 							/>
 
 							<small id="emailHelp" class="form-text text-muted">
@@ -61,4 +61,9 @@
 
 	<div class="col">Right</div>
 </div>
+
+<script>
+	const elem = document.getElementById('reservation-date');
+	const rangepicker = new DateRangePicker(elem, { format: 'yyyy-mm-dd' });
+</script>
 {{ end }}
