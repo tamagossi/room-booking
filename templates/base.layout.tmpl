@@ -134,6 +134,29 @@
 		></script>
 
 		<script src="https://unpkg.com/notie"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+		<script>
+			const elem = document.getElementById('reservation-date');
+			const rangepicker = new DateRangePicker(elem, { format: 'yyyy-mm-dd' });
+
+			function showAlert(text, type = 'success') {
+				notie.alert({
+					type,
+					text: message,
+				});
+			}
+
+			function showModal({ title, text, icon, confirmTextButton, html }) {
+				Swal.fire({
+					confirmButtonText,
+					html,
+					icon,
+					text,
+					title,
+				});
+			}
+		</script>
 	</body>
 </html>
 
