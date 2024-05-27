@@ -65,5 +65,12 @@
 <script>
 	const elem = document.getElementById('reservation-date');
 	const rangepicker = new DateRangePicker(elem, { format: 'yyyy-mm-dd' });
+
+	function showAlert(text, type = 'success') {
+		notie.alert({
+			type,
+			text: message,
+		});
+	}
 </script>
 {{ end }}
