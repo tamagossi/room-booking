@@ -156,6 +156,52 @@
 					title,
 				});
 			}
+
+			function toast() {
+				let error = function (args) {
+					const { text, title, footer } = args;
+
+					Swal.fire({
+						title,
+						text,
+						footer,
+						icon: 'error',
+					});
+				};
+
+				let success = function (args) {
+					const { text, title, footer } = args;
+
+					Swal.fire({
+						title,
+						text,
+						footer,
+						icon: 'success',
+					});
+				};
+
+				let show = function (args) {
+					const { title = '', icon = 'success', position = 'top-end' } = args;
+
+					const Toast = Swal.mixin({
+						icon,
+						position,
+						showConfirmButton: false,
+						timer: 3000,
+						timerProgresBar: true,
+						title,
+						toast: true,
+						didOpen: (toast) => {
+							toast.addEventListener('mouseenter', Swal.stopTime);
+							toast.addEventListener('mouseleave', Swal.resumeTimer);
+						},
+					});
+
+					Toast.fire();
+				};
+
+				return { sucess, toast };
+			}
 		</script>
 	</body>
 </html>
