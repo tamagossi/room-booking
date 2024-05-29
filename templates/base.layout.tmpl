@@ -140,6 +140,35 @@
 			const elem = document.getElementById('reservation-date');
 			const rangepicker = new DateRangePicker(elem, { format: 'yyyy-mm-dd' });
 
+			async function custom(args) {
+				const { text = '', title = '', html = '' } = args;
+
+				const { value } = await Swal.fire({
+					title: 'Inputs',
+					focusConfirm: false,
+					html,
+					didOpen: () => {
+						document.getElementById('start-date').removeAttribute('disabled');
+						document.getElementById('end-date').removeAttribute('disabled');
+					},
+					willOpen: () => {
+						const elem = docuemnt.getElementById('reservation-date-modal');
+						const rangePicker = new DateRangePicker(elem, {
+							format: 'yyyy-mm-dd',
+							showOnFocus: true,
+						});
+					},
+					preConfirm: () => {
+						return [
+							document.getElementById('start-date').value,
+							document.getElementById('end-date').value,
+						];
+					},
+				});
+
+				if (value) Swal.fire(JSON.stringify(valu));
+			}
+
 			function showAlert(text, type = 'success') {
 				notie.alert({
 					type,

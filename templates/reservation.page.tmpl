@@ -65,5 +65,43 @@
 <script>
 	const elem = document.getElementById('reservation-date');
 	const rangepicker = new DateRangePicker(elem, { format: 'yyyy-mm-dd' });
+
+	let template = `
+		<form
+			action=""
+			class="needs-validation"
+			id="check-availability-form"
+			method="post"
+			novalidate
+		>
+			<div class="form-row" id="reservation-date-modal">
+				<div class="col">
+					<div class="form-row">
+						<div class="col">
+							<input
+								class="form-control"
+								id="start-date"
+								name="start-date"
+								placeholder="Arrival"
+								required
+								type="text"
+							/>
+						</div>
+
+						<div class="col">
+							<input
+								class="form-control"
+								id="end-date"
+								name="end-date"
+								placeholder="Deprature"
+								required
+								type="text"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	`;
 </script>
 {{ end }}
