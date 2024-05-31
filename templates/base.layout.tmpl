@@ -137,22 +137,20 @@
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 		<script>
-			const elem = document.getElementById('reservation-date');
-			const rangepicker = new DateRangePicker(elem, { format: 'yyyy-mm-dd' });
-
-			async function custom(args) {
+			async function openRangePickerModal(args) {
 				const { text = '', title = '', html = '' } = args;
 
 				const { value } = await Swal.fire({
 					title: 'Inputs',
 					focusConfirm: false,
+					width: '790px',
 					html,
 					didOpen: () => {
 						document.getElementById('start-date').removeAttribute('disabled');
 						document.getElementById('end-date').removeAttribute('disabled');
 					},
 					willOpen: () => {
-						const elem = docuemnt.getElementById('reservation-date-modal');
+						const elem = document.getElementById('reservation-date-modal');
 						const rangePicker = new DateRangePicker(elem, {
 							format: 'yyyy-mm-dd',
 							showOnFocus: true,

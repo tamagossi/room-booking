@@ -27,7 +27,7 @@
 
 	<div class="row">
 		<div class="col text-center">
-			<a href="/make-reservation-gq" class="btn btn-primary">Check Availibility</a>
+			<button class="btn btn-primary" onclick="checkAvailibity()">Check Availibility</button>
 		</div>
 	</div>
 </div>
@@ -39,4 +39,51 @@
 
 	<div class="col">Right</div>
 </div>
+{{ end }}
+
+{{ define "js"}}
+<script>
+	const checkAvailibity = () => {
+		let html = `
+			<form 
+				action="" 
+				class="needs-validation" 
+				id="check-availability-form" 
+				method="post" 
+				novalidate 
+				style="width: 720px; height:400px"
+			>
+				<div class="form-row" id="reservation-date-modal">
+					<div class="col">
+						<div class="form-row">
+							<div class="col">
+								<input
+									class="form-control"
+									id="start-date"
+									name="start-date"
+									placeholder="Arrival"
+									required
+									type="text"
+								/>
+							</div>
+	
+							<div class="col">
+								<input
+									class="form-control"
+									id="end-date"
+									name="end-date"
+									placeholder="Deprature"
+									required
+									type="text"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		`;
+
+		openRangePickerModal({ html, title: 'Choose your date' });
+	};
+</script>
 {{ end }}
